@@ -53,6 +53,7 @@ jobs:
       - name: Publish Results
         run: |
           COMPOSER_LOCK_DIFF="<!-- composer-lock-diff -->\n## Composer Lock Diff\n$(cat composer-lock-diff.md)"
+          COMPOSER_LOCK_DIFF=$(echo $COMPOSER_LOCK_DIFF | jq -Rsa .)
           FIRST=true
           cat composer-lock-diff.md >> $GITHUB_STEP_SUMMARY
           curl -s -L -f -X GET \
@@ -67,7 +68,7 @@ jobs:
                 -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
                 -H "X-GitHub-Api-Version: 2022-11-28" \
                 https://api.github.com/repos/${{ github.repository }}/pulls/comments/$i \
-                -d "{\"body\":$(cat composer-lock-diff.md | jq -Rsa .),\"commit_id\":\"$DRAINPIPE_SHA\",\"path\":\"composer.lock\",\"subject_type\":\"file\",\"side\":\"RIGHT\"}"
+                -d "{\"body\":$COMPOSER_LOCK_DIFF,\"commit_id\":\"$DRAINPIPE_SHA\",\"path\":\"composer.lock\",\"subject_type\":\"file\",\"side\":\"RIGHT\"}"
             fi
               curl -L \
                 -X DELETE \
@@ -83,5 +84,5 @@ jobs:
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
               https://api.github.com/repos/${{ github.repository }}/pulls/$DRAINPIPE_PR_NUMBER/comments \
-              -d "{\"body\":$(cat composer-lock-diff.md | jq -Rsa .),\"commit_id\":\"$DRAINPIPE_SHA\",\"path\":\"composer.lock\",\"subject_type\":\"file\",\"side\":\"RIGHT\"}"
+              -d "{\"body\":$COMPOSER_LOCK_DIFF,\"commit_id\":\"$DRAINPIPE_SHA\",\"path\":\"composer.lock\",\"subject_type\":\"file\",\"side\":\"RIGHT\"}"
           fi
