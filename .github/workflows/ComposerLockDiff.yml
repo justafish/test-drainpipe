@@ -53,9 +53,8 @@ jobs:
       - name: Publish Results
         run: |
           COMPOSER_LOCK_DIFF="<!-- composer-lock-diff -->\n## Composer Lock Diff\n$(cat composer-lock-diff.md)"
-          COMPOSER_LOCK_DIFF=$(echo $COMPOSER_LOCK_DIFF | jq -Rsa .)
           FIRST=true
-          cat composer-lock-diff.md >> $GITHUB_STEP_SUMMARY
+          echo $COMPOSER_LOCK_DIFF >> $GITHUB_STEP_SUMMARY
           curl -s -L -f -X GET \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
