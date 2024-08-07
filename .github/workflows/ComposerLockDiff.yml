@@ -16,8 +16,9 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
+
+      - name: Checkout base branch
+        run: git fetch origin ${{ github.base_ref }} --depth 1
 
       - uses: actions/cache@v4
         with:
