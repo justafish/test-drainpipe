@@ -15,10 +15,13 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout the base branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          ref: ${{ github.base_ref }}
 
-      - name: Checkout base branch
-        run: git fetch origin ${{ github.base_ref }} --depth 1
+      - uses: actions/checkout@v4
 
       - uses: actions/cache@v4
         with:
