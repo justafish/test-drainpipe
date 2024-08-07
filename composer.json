@@ -19,7 +19,8 @@
         "drupal/core-composer-scaffold": "^11.0",
         "drupal/core-project-message": "^11.0",
         "drupal/core-recommended": "^11.0",
-        "lullabot/drainpipe": "^3.8"
+        "lullabot/drainpipe": "^3.8",
+        "nesbot/carbon": "^3.7"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -39,6 +40,9 @@
         "sort-packages": true
     },
     "extra": {
+        "drainpipe": {
+            "github": []
+        },
         "drupal-scaffold": {
             "locations": {
                 "web-root": "web/"
@@ -96,5 +100,8 @@
                 "      composer remove drupal/core-project-message"
             ]
         }
+    },
+    "require-dev": {
+        "davidrjonas/composer-lock-diff": "^1.7"
     }
 }
