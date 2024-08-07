@@ -100,5 +100,8 @@
                 "      composer remove drupal/core-project-message"
             ]
         }
+    },
+    "require-dev": {
+        "davidrjonas/composer-lock-diff": "^1.7"
     }
 }
