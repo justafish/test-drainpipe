@@ -70,7 +70,8 @@ tasks:
 
       usage: test test:security composer-lock-diff="composer-lock-diff.md"
 
-      composer_lock_diff     Optionally output a markdown table from Composer Lock Diff. composer.lock must have modifications which aren't checked into git and you must install the .
+      composer_lock_diff       Optionally output a markdown table from Composer Lock Diff
+      composer_lock_diff_from  The git ref to compare to, defaults to "main"
     cmds:
       #- cmd: |
       #    if [ "{{.format}}" == "junit" ]; then
