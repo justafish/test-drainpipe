@@ -52,7 +52,7 @@ jobs:
 
       - name: Publish Results
         run: |
-          COMPOSER_LOCK_DIFF="<\!-- composer-lock-diff -->
+          COMPOSER_LOCK_DIFF="<!-- composer-lock-diff -->
           ## Composer Lock Diff
           $(cat composer-lock-diff.md)"
           COMPOSER_LOCK_DIFF=$(echo "$COMPOSER_LOCK_DIFF" | jq -Rsa .)
