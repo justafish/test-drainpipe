@@ -91,7 +91,7 @@ tasks:
       #  fi
       - composer audit
       - |
-        composer global exec -- "composer-lock-diff --from {{ shellQuote (.composer_lock_diff | default "main") }} --md"
+        ./vendor/bin/composer-lock-diff --from {{ shellQuote (.composer_lock_diff_from | default "main") }} --md
         if [ "" != {{ shellQuote (.composer_lock_diff | default "") }} ]; then
-          composer global exec -- "composer-lock-diff --from {{ shellQuote (.composer_lock_diff | default "main") }} --md > {{ shellQuote (.composer_lock_diff | default "") }}"
+          ./vendor/bin/composer-lock-diff --from {{ shellQuote (.composer_lock_diff_from | default "main") }} --md > {{ shellQuote (.composer_lock_diff | default "") }}
         fi
