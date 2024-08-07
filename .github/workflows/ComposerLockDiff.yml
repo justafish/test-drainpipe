@@ -39,16 +39,8 @@ jobs:
       - name: Build Project
         run: ddev composer install
 
-      - name: Install composer lock diff
-        run: ddev composer global require davidrjonas/composer-lock-diff:^1.0
-
-      - name: Prepare repository
-        run: |
-          git reset --soft HEAD^1
-          git reset .
-
       - name: Run Security Checks
-        run: ddev task security composer_lock_diff=composer-lock-diff.md
+        run: ddev task security composer_lock_diff_from=${{ github.base_ref }} composer_lock_diff=composer-lock-diff.md
 
       - name: Publish Results
         run: |
